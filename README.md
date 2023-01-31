@@ -4,7 +4,7 @@
 
 Application de location d'animaux entre particuliers. 
 
-Un propriétaire peut "prêter" son animal de compagnie à une personne, famille qui n'en a pas et qui aimerait profiter de la compagnie d'un animal pour quelques jours. 
+Un propriétaire peut "prêter" son animal de compagnie à une personne, famille aimante qui n'en a pas et qui aimerait profiter de la compagnie d'un animal pour quelques jours. 
 Pour cela, après avoir créé son compte, il crée la fiche d'identité de l'animal, les dates de disponibilité et le prix par jour.
 Cela crée une annonce visible par tous les utilisateurs.
 Le propriétaire à la possibilité de créer, modifier ou supprimer une annonce. 
