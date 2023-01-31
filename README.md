@@ -34,9 +34,9 @@ Une table speecies est prévue pour gérer plusieurs espèces animales.
 
 
 On pourrait prévoir dans des features ultérieures, les fonctionnalités suivantes : 
-- laisser des commentaires sur le propriétaire le client
-- afficher la liste géolocalisée des animaux disponibles en fonction de l'adresse du client lorsqu'il est connecté
-- faire une recherche par dates disponibles
+- Donner la possibilité au client de laisser des commentaires sur le propriétaire et l'animal. De même, donner la possibilité au propriétaire de laisser des commentaires sur le client.
+- afficher la liste géolocalisée des animaux disponibles en fonction de l'adresse du client lorsqu'il est connecté. Utiliser une API pour pour les adresses.
+
 
 ### MODELE DE DONNEES
 ![locanimo_DB](https://user-images.githubusercontent.com/93591663/215838760-1973859c-2520-4061-a156-8f695d529f58.png)
