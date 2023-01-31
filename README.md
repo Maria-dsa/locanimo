@@ -17,7 +17,7 @@ En envoyant sa demande de réservation, celle-ci s'affiche sur l'interface du pr
 Le propriétaire a la possibilité d'accepter ou de rejeter la demande de réservation. 
 Le client et le propriétaire peuvent visualiser le statut de la demande. 
 
-Si elle est acceptée par le propriétaire, on peut imaginer dans des features ultérieures, un système de facturation et de paiement. 
+Si elle est acceptée par le propriétaire, on pourrait imaginer dans des features ultérieures, un système de facturation et de paiement. 
 
 Pour cela, différents statuts permettent de gérer la demande de réservation : 
 
