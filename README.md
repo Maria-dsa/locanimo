@@ -37,9 +37,11 @@ On pourrait prévoir dans des features ultérieures, les fonctionnalités suivan
 - laisser des commentaires sur le propriétaire le client
 - afficher la liste géolocalisée des animaux disponibles en fonction de l'adresse du client lorsqu'il est connecté
 - faire une recherche par dates disponibles
+
+### MODELE DE DONNEES
 ![locanimo_DB](https://user-images.githubusercontent.com/93591663/215838760-1973859c-2520-4061-a156-8f695d529f58.png)
 
-#BACKLOG
+### BACKLOG
 https://github.com/users/Maria-dsa/projects/1
 ![image](https://user-images.githubusercontent.com/93591663/215843194-2b35db51-dd27-4a29-b234-e4554b6cb2e0.png)
 
