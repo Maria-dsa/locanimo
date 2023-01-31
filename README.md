@@ -11,7 +11,7 @@ Le propriétaire à la possibilité de créer, modifier ou supprimer une annonce
 
 Le visiteur peut voir toutes les annonces. 
 S'il veut faire une demande de "réservation" d'un animal, il doit se connecter (créer son compte le cas échéant).
-En tant que client, après avoir sélectionné un animal, il doit choisir la période de réservation en fonction des disponibilités. 
+En tant que client, après avoir sélectionné un animal, il doit préciser la date de réservation souhaitée en fonction des disponibilités. 
 
 En envoyant sa demande de réservation, celle-ci s'affiche sur l'interface du propriétaire. 
 Le propriétaire a la possibilité d'accepter ou de rejeter la demande de réservation. 
