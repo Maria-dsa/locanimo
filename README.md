@@ -41,3 +41,5 @@ On pourrait prévoir dans des features ultérieures, les fonctionnalités suivan
 
 #BACKLOG
 https://github.com/users/Maria-dsa/projects/1
+![image](https://user-images.githubusercontent.com/93591663/215843194-2b35db51-dd27-4a29-b234-e4554b6cb2e0.png)
+
