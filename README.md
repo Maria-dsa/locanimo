@@ -48,4 +48,5 @@ https://github.com/users/Maria-dsa/projects/1
 ### WIREFRAME
 https://excalidraw.com/#json=W0q72_ga6zbKLx1rEdhA5,f6yqi7ikzdZvSOWjxUsoDA
 
+![locanimo](https://user-images.githubusercontent.com/93591663/216000717-c5bb401b-3d57-4879-a05f-8da051da4dce.png)
 
