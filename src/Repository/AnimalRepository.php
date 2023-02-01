@@ -40,7 +40,7 @@ class AnimalRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Animal[] Returns an array of Animal objects
+//     * @return AnimalFixtures[] Returns an array of AnimalFixtures objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class AnimalRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Animal
+//    public function findOneBySomeField($value): ?AnimalFixtures
 //    {
 //        return $this->createQueryBuilder('a')
 //            ->andWhere('a.exampleField = :val')
