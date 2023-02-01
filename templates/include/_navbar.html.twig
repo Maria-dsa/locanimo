@@ -1,0 +1,51 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light static-top mb-5 shadow-lg">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img src="https://makesense.org/wp-content/uploads/sites/4/2020/09/logo-makesense-dark.png" alt="Logo Makesense" height="36">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto ">
+                {% if app.user %}
+                    <li class="nav-item ">
+                        <a class="nav-link" href=""><i class="bi bi-card-checklist"></i>xxx</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_decision_mine') }}"><i class="bi bi-calendar3"></i> Mes décisions</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href=""><i class="bi bi-people"></i> yyy</a>
+                    </li>
+
+                    <div class="btn-group">
+                        <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+
+                            <img src ="https://picsum.photos/id/236/30/30" class="rounded-circle"/>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li class="dropdown-item fst-italic text-uppercase">xxx</li>
+                            <li><a class="dropdown-item" href="">Mon compte</a></li>
+                            <li><a class="dropdown-item" href="">Se déconnecter</a></li>
+                        </ul>
+                    </div>
+
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_login') }}">Se connecter</a>
+                    </li>
+                    <li class="nav-item">
+                        <p class="nav-link">|</p>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_register') }}">S'inscrire</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
