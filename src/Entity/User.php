@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -44,6 +46,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 15, nullable: true)]
     private ?string $phoneNumber = null;
+
+    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Animal::class)]
+    private Collection $animals;
+
+    #[ORM\OneToMany(mappedBy: 'customer', targetEntity: ScheduleRental::class)]
+    private Collection $scheduleRentals;
+
+    public function __construct()
+    {
+        $this->animals = new ArrayCollection();
+        $this->scheduleRentals = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -183,6 +197,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPhoneNumber(?string $phoneNumber): self
     {
         $this->phoneNumber = $phoneNumber;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Animal>
+     */
+    public function getAnimals(): Collection
+    {
+        return $this->animals;
+    }
+
+    public function addAnimal(Animal $animal): self
+    {
+        if (!$this->animals->contains($animal)) {
+            $this->animals->add($animal);
+            $animal->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnimal(Animal $animal): self
+    {
+        if ($this->animals->removeElement($animal)) {
+            // set the owning side to null (unless already changed)
+            if ($animal->getOwner() === $this) {
+                $animal->setOwner(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ScheduleRental>
+     */
+    public function getScheduleRentals(): Collection
+    {
+        return $this->scheduleRentals;
+    }
+
+    public function addScheduleRental(ScheduleRental $scheduleRental): self
+    {
+        if (!$this->scheduleRentals->contains($scheduleRental)) {
+            $this->scheduleRentals->add($scheduleRental);
+            $scheduleRental->setCustomer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeScheduleRental(ScheduleRental $scheduleRental): self
+    {
+        if ($this->scheduleRentals->removeElement($scheduleRental)) {
+            // set the owning side to null (unless already changed)
+            if ($scheduleRental->getCustomer() === $this) {
+                $scheduleRental->setCustomer(null);
+            }
+        }
 
         return $this;
     }

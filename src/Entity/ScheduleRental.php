@@ -26,6 +26,12 @@ class ScheduleRental
     #[ORM\Column(length: 45)]
     private ?string $status = null;
 
+    #[ORM\ManyToOne(inversedBy: 'scheduleRentals')]
+    private ?Animal $animal = null;
+
+    #[ORM\ManyToOne(inversedBy: 'scheduleRentals')]
+    private ?User $customer = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +81,30 @@ class ScheduleRental
     public function setStatus(string $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getAnimal(): ?Animal
+    {
+        return $this->animal;
+    }
+
+    public function setAnimal(?Animal $animal): self
+    {
+        $this->animal = $animal;
+
+        return $this;
+    }
+
+    public function getCustomer(): ?User
+    {
+        return $this->customer;
+    }
+
+    public function setCustomer(?User $customer): self
+    {
+        $this->customer = $customer;
 
         return $this;
     }

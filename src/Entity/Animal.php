@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AnimalRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -28,6 +30,24 @@ class Animal
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
+
+    #[ORM\ManyToOne(inversedBy: 'animals')]
+    private ?Species $species = null;
+
+    #[ORM\ManyToOne(inversedBy: 'animals')]
+    private ?User $owner = null;
+
+    #[ORM\OneToMany(mappedBy: 'animal', targetEntity: Availablity::class)]
+    private Collection $availablities;
+
+    #[ORM\OneToMany(mappedBy: 'animal', targetEntity: ScheduleRental::class)]
+    private Collection $scheduleRentals;
+
+    public function __construct()
+    {
+        $this->availablities = new ArrayCollection();
+        $this->scheduleRentals = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -90,6 +110,90 @@ class Animal
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getSpecies(): ?Species
+    {
+        return $this->species;
+    }
+
+    public function setSpecies(?Species $species): self
+    {
+        $this->species = $species;
+
+        return $this;
+    }
+
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?User $owner): self
+    {
+        $this->owner = $owner;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Availablity>
+     */
+    public function getAvailablities(): Collection
+    {
+        return $this->availablities;
+    }
+
+    public function addAvailablity(Availablity $availablity): self
+    {
+        if (!$this->availablities->contains($availablity)) {
+            $this->availablities->add($availablity);
+            $availablity->setAnimal($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAvailablity(Availablity $availablity): self
+    {
+        if ($this->availablities->removeElement($availablity)) {
+            // set the owning side to null (unless already changed)
+            if ($availablity->getAnimal() === $this) {
+                $availablity->setAnimal(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ScheduleRental>
+     */
+    public function getScheduleRentals(): Collection
+    {
+        return $this->scheduleRentals;
+    }
+
+    public function addScheduleRental(ScheduleRental $scheduleRental): self
+    {
+        if (!$this->scheduleRentals->contains($scheduleRental)) {
+            $this->scheduleRentals->add($scheduleRental);
+            $scheduleRental->setAnimal($this);
+        }
+
+        return $this;
+    }
+
+    public function removeScheduleRental(ScheduleRental $scheduleRental): self
+    {
+        if ($this->scheduleRentals->removeElement($scheduleRental)) {
+            // set the owning side to null (unless already changed)
+            if ($scheduleRental->getAnimal() === $this) {
+                $scheduleRental->setAnimal(null);
+            }
+        }
 
         return $this;
     }

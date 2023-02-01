@@ -23,6 +23,9 @@ class Availablity
     #[ORM\Column]
     private ?float $dailyPrice = null;
 
+    #[ORM\ManyToOne(inversedBy: 'availablities')]
+    private ?Animal $animal = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +63,18 @@ class Availablity
     public function setDailyPrice(float $dailyPrice): self
     {
         $this->dailyPrice = $dailyPrice;
+
+        return $this;
+    }
+
+    public function getAnimal(): ?Animal
+    {
+        return $this->animal;
+    }
+
+    public function setAnimal(?Animal $animal): self
+    {
+        $this->animal = $animal;
 
         return $this;
     }
