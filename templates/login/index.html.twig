@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Se connecter{% endblock %}
+
+{% block body %}
+
+    <h1><i class="bi bi-person-check me-2"></i><span>Se connecter</span></h1>
+    {% if error %}
+        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    <div class=" container d-flex justify-content-center text-center mb-5">
+        <div>
+            <form action="{{ path('app_login') }}" method="post">
+                <div class="row mt-4">
+                    <div class="col">
+                        <label for="username">Email:</label>
+                    </div>
+                    <div class="col text-start">
+                        <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}">
+                    </div>
+                </div>
+
+                <div class="row mt-2">
+                    <div class="col">
+                        <label for="password">Mot de passe:</label>
+
+                    </div>
+                    <div class="col text-start">
+                        <input class="form-control" type="password" id="password" name="_password">
+                    </div>
+                </div>
+
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                <div class=" mt-3">
+                    <a class="password fs-6" href="#">Mot de passe oublié</a>
+                </div>
+                <button class="btn btn-primary mt-4" type="submit">Connexion</button>
+            </form>
+            {# @TODO créer le mot de passe oublié #}
+
+            <br>
+            <br>Si vous n'avez pas encore créé votre compte, vous pouvez le faire <a href="#">ici</a> ;)
+        </div>
+    </div>
+
+{% endblock %}

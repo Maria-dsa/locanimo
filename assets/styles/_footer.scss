@@ -1,0 +1,9 @@
+footer {
+  margin-top: auto;
+  a {
+    color: rgba(249, 250, 251, 0.5);
+    &:hover {
+      color: $white;
+    }
+  }
+}
