@@ -45,3 +45,7 @@ On pourrait prévoir dans des features ultérieures, les fonctionnalités suivan
 https://github.com/users/Maria-dsa/projects/1
 ![image](https://user-images.githubusercontent.com/93591663/215843194-2b35db51-dd27-4a29-b234-e4554b6cb2e0.png)
 
+### WIREFRAME
+https://excalidraw.com/#json=W0q72_ga6zbKLx1rEdhA5,f6yqi7ikzdZvSOWjxUsoDA
+
+
