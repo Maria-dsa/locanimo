@@ -24,8 +24,8 @@ Pour cela, différents statuts permettent de gérer la demande de réservation :
 - pending : lorsque le client envoie sa demande 
 - accepted : à la main du propriétaire
 - rejected : à la main du propriétaire
-- canceled by the owner : à la main du propriétaire
-- canceled by the customer : à la main du client
+- canceledO : à la main du propriétaire
+- canceledC : à la main du client
 - Done : une fois la prestation réalisée (on pourrait imaginer que ce statut se mette à jour après le paiement et la date de réalisation, dans une feature ultérieure)
 
 
