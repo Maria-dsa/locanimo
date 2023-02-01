@@ -1,0 +1,11 @@
+.nav-link {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.navbar-brand {
+  margin-right: 2rem;
+}
+.dropdown-toggle {
+  color: $gray-600;
+}
