@@ -42,17 +42,17 @@ class AnimalRepository extends ServiceEntityRepository
 //    /**
 //     * @return AnimalFixtures[] Returns an array of AnimalFixtures objects
 //     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('a.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function findAllByOwner($user): array
+    {
+        return $this->createQueryBuilder('a')
+            ->where('a.owner = :user')
+            ->setParameter('user', $user)
+            ->orderBy('a.id', 'ASC')
+            ->setMaxResults(30)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
 //    public function findOneBySomeField($value): ?AnimalFixtures
 //    {

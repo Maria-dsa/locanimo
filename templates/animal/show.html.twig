@@ -5,23 +5,21 @@
 {% block body %}
 
 <div class="container-fluid flex col">
-    <h1 class="text-center text-white bg-secondary rounded-5 col-lg-6">{{ animal.name }}</h1>
+    <h1 class="text-center text-secondary "><i class="bi bi-chat-heart-fill text-secondary me-2"></i>{{ animal.name }}</h1>
     <div class ="row">
-        <div class="animal col-lg-7 ms-lg-5">
-            <div class="row bg-secondary border-dark me-lg-4">
+        <div class="animal col-lg-7 ms-lg-2">
+            <div class="row me-lg-4">
                 <div class="row">
                     <div class="col">
-                        <img src="{{ vich_uploader_asset(animal) }}" alt="{{ animal.name }}">
+                        <img class ="img-fluid h-75" src="{{ vich_uploader_asset(animal) }}" alt="{{ animal.name }}">
                     </div>
                     <div class="col">
                         <ul>
-                            <li>{{ animal.age }}</li>
-                            <li>{{ animal.breed }}</li>
+                            <li class="list-unstyled"><i class="bi bi-arrow-right-circle-fill me-2"></i>Age : {{ animal.age }} ans</li>
+                            <li class="list-unstyled"><i class="bi bi-arrow-right-circle-fill me-2"></i>Race : {{ animal.breed }}</li>
+                            <li class="list-unstyled"><i class="bi bi-arrow-right-circle-fill me-2"></i>Description : {{ animal.description }}</li>
                         </ul>
                     </div>
-                </div>
-                <div class=" row bg-light">
-                {{ animal.description }}
                 </div>
             </div>
             <div class="row">
@@ -29,32 +27,62 @@
                     <div class="card-header bg-primary text-white border-dark ">
                         <h5 class="card-title">{{ animal.owner.firstName }} {{ animal.owner.lastName }}</h5>
                     </div>
-                    <div class="card-body bg-transparent text-primary">
+                    <div class="card-body bg-transparent text-primary"><i class="bi bi-postcard"></i>
                         {{ animal.owner.address }} - {{ animal.owner.zipCode }} {{ animal.owner.city }}
                     </div>
-                    <div class="card-footer bg-transparent border-dark">
+                    <div class="card-footer bg-transparent border-dark"><i class="bi bi-telephone"></i>
                         {{ animal.owner.phoneNumber }}
                     </div>
                 </div>
             </div>
         </div>
-        <div class="availablity col-lg-4 bg-secondary text-white rounded-4 shadow pt-2 ">
+        <div class="availablity col-lg-4 text-white rounded-4 ">
+            <div class="bg-secondary shadow p-2 rounded-2">
             <h3><i class="bi bi-calendar2-week-fill text-white me-2"></i> Disponibilités</h3>
             <ul class="list-group pt-3">
-                {% for availablity in availablities %}
-                <li class="list-group-item bg-white"> <i class="bi bi-calendar2-week-fill text-dark me-2"></i>Du {{ availablity.startedAt|date('d/m/Y') }} au {{ availablity.endedAt|date('d/m/Y') }}
-                    - <i class="bi bi-calendar2-week-fill text-dark me-2"></i> Tarif/jour : {{ availablity.dailyPrice }} €</li>
-            {% endfor %}
+               {% for availablity in animal.availablities %}
+                    {% if availablity.startedAt|date('Y-m-d') > "now"|date('Y-m-d')
+                        or availablity.endedAt|date('Y-m-d') > "now"|date('Y-m-d') %}
+                <li class="list-group-item bg-white"> <i class="bi bi-calendar2-week-fill text-dark me-2"></i>
+                    Du {{ availablity.startedAt|date('d/m/Y') }} au {{ availablity.endedAt|date('d/m/Y') }}
+                    - <i class="bi bi-tags text-primary"></i> {{ availablity.dailyPrice }} €/j</li>
+                    {% endif %}
+               {% else %}
+                   <li class="list-group-item bg-white">pas de disponibilités</li>
+                {% endfor %}
             </ul>
+            </div>
+            {% if app.user%}
+                {% if app.user!=animal.owner %}
+            <div class="m-3">
+            <a href="{{ path('app_schedule_rental_new', {'animalId': animal.id}) }}" type="button" class="btn btn-outline-primary mx-auto">
+                <i class="bi bi-plus-circle-fill mx-2"></i><span>Faire une réservation</span></a>
+            </div>
+                    {% endif %}
+                {% else %}
+                    <div class="m-3">
+                        <a href="{{ path('app_login') }}" type="button" class="btn bg-warning text-white mx-auto">
+                            <span>Pour faire une réservation, connectez-vous</span></a>
+                    </div>
 
+            {% endif %}
         </div>
+
+
+
     </div>
+    {% if app.user%}
+    {% if app.user == animal.owner %}
+    <a href="{{ path('app_animal_mine') }}">Retour à la liste</a>
+    <a href="{{ path('app_animal_edit', {'id': animal.id}) }}">Modifier la fiche</a>
+    <a href="{{ path('app_animal_availablities_add', {'id': animal.id}) }}">Ajouter une disponibilité</a>
+    <a href="{{ path('app_animal_availablities_edit', {'id': animal.id}) }}">Modifier la liste des disponibilités</a>
+    {{ include('animal/_delete_form.html.twig') }}
+    {% endif %}
+    {% else %}
+        <a href="{{ path('app_home') }}">Retour à la liste</a>
+    {% endif %}
+
 </div>
 
-
-    <a href="{{ path('app_animal_index') }}">back to list</a>
-
-    <a href="{{ path('app_animal_edit', {'id': animal.id}) }}">edit</a>
-
-    {{ include('animal/_delete_form.html.twig') }}
 {% endblock %}

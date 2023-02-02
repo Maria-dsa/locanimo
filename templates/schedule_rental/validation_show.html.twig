@@ -32,7 +32,7 @@
 
     {{ include('schedule_rental/_validation_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('app_schedule_rental_index') }}">back to list</a>
+    <a href="{{ path('app_schedule_rental_owner') }}">back to list</a>
 
     <a href="{{ path('app_schedule_rental_edit', {'id': schedule_rental.id}) }}">edit</a>
 
