@@ -8,6 +8,7 @@ use App\Form\ScheduleRental\ScheduleRentalType;
 use App\Repository\AnimalRepository;
 use App\Repository\AvailablityRepository;
 use App\Repository\ScheduleRentalRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,14 +17,27 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/schedule/rental')]
 class ScheduleRentalController extends AbstractController
 {
-    #[Route('/', name: 'app_schedule_rental_index', methods: ['GET'])]
-    public function index(ScheduleRentalRepository $scheduleRentalRepository): Response
+    #[IsGranted('ROLE_USER')]
+    #[Route('/owner', name: 'app_schedule_rental_owner', methods: ['GET'])]
+    public function indexOwner(ScheduleRentalRepository $scheduleRentalRepository): Response
     {
-        return $this->render('schedule_rental/index.html.twig', [
-            'schedule_rentals' => $scheduleRentalRepository->findAll(),
+        $user = $this->getUser();
+        return $this->render('schedule_rental/owner.html.twig', [
+            'scheduleRentals' => $scheduleRentalRepository->findAllByOwner($user),
         ]);
     }
 
+    #[IsGranted('ROLE_USER')]
+    #[Route('/customer', name: 'app_schedule_rental_customer', methods: ['GET'])]
+    public function indexCustomer(ScheduleRentalRepository $scheduleRentalRepository): Response
+    {
+        $user = $this->getUser();
+        return $this->render('schedule_rental/customer.html.twig', [
+            'scheduleRentals' => $scheduleRentalRepository->findAllByCustomer($user),
+        ]);
+    }
+
+    #[IsGranted('ROLE_USER')]
     #[Route('/new/{animalId}', name: 'app_schedule_rental_new', methods: ['GET', 'POST'])]
     public function new(
         Request $request,
@@ -69,7 +83,7 @@ class ScheduleRentalController extends AbstractController
             'form' => $form,
         ]);
     }
-
+    #[IsGranted('ROLE_USER')]
     #[Route('/{id}', name: 'app_schedule_rental_show', methods: ['GET'])]
     public function show(ScheduleRental $scheduleRental): Response
     {
@@ -78,7 +92,8 @@ class ScheduleRentalController extends AbstractController
         ]);
     }
 //uniquement pour le owner
-    #[Route('/validation/{id}', name: 'app_schedule_rental_show', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_USER')]
+    #[Route('/validation/{id}', name: 'app_schedule_validation_show', methods: ['GET', 'POST'])]
     public function validation(
         ScheduleRental $scheduleRental,
         Request $request,
@@ -91,7 +106,7 @@ class ScheduleRentalController extends AbstractController
             $scheduleRentalRepository->save($scheduleRental, true);
 
             //modifier le redirect
-            return $this->redirectToRoute('app_schedule_rental_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_schedule_rental_owner', [], Response::HTTP_SEE_OTHER);
         }
         return $this->render('schedule_rental/validation_show.html.twig', [
             'schedule_rental' => $scheduleRental,
@@ -99,6 +114,7 @@ class ScheduleRentalController extends AbstractController
         ]);
     }
 //uniquement pour le customer
+    #[IsGranted('ROLE_USER')]
     #[Route('/{id}/edit', name: 'app_schedule_rental_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, ScheduleRental $scheduleRental, ScheduleRentalRepository $scheduleRentalRepository): Response
     {
@@ -116,7 +132,7 @@ class ScheduleRentalController extends AbstractController
             'form' => $form,
         ]);
     }
-
+    #[IsGranted('ROLE_USER')]
     #[Route('/{id}', name: 'app_schedule_rental_delete', methods: ['POST'])]
     public function delete(Request $request, ScheduleRental $scheduleRental, ScheduleRentalRepository $scheduleRentalRepository): Response
     {

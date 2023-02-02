@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes animaux{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class ="text-center">Mes animaux</h1>
+
+        <div class="m-2"><a href="{{ path('app_animal_new') }}" type="button" class="btn btn-outline-primary mx-5">
+            <i class="bi bi-plus-circle-fill mx-2"></i><span>Ajouter une annonce </span></a>
+        </div>
+
+
+        <div class="row custom-line">
+            {% if animals %}
+                {% for animal in animals %}
+                    <div class="col-sm-10 col-md-6 col-lg-4 mt-4 mb-4 ">
+                        <div class="card h-100 px-3">
+                            <div class="card-header bg-transparent border-dark text-secondary">
+                                <h2 class="card-title"><i class="bi bi-chat-heart-fill text-secondary me-2"></i>{{ animal.name }}</h2>
+                            </div>
+                            <div class="card-body text-primary">
+                                <img class= "img-fluid h-100" src="{{ vich_uploader_asset(animal) }}">
+                            </div>
+                            <div class="card-footer bg-transparent border-dark">
+                                {% for availablity in animal.availablities%}
+                                    {% if availablity.startedAt|date('Y-m-d') > "now"|date('Y-m-d') %}
+                                    {% if loop.first %}
+                                        <span class ="bg-secondary rounded-3 text-white p-1">Prochaine disponibilité : {{ availablity.startedAt|date('d/m/y') }}</span>
+                                        {% endif %}
+                                    {% endif %}
+                                    {% else %}
+                                        <span class ="bg-info rounded-3 text-white p-1"><i class="bi bi-x-circle me-2"></i>Pas de disponibilités</span>
+                                {% endfor %}
+                                <br><a href="{{ path('app_animal_show', {id: animal.id }) }}"
+                                   class="stretched-link"></a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <h3>Aucune annonce</h3>
+                        {% endif %}
+        </div>
+    </div>
+{% endblock %}

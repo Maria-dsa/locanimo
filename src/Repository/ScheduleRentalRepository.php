@@ -42,17 +42,31 @@ class ScheduleRentalRepository extends ServiceEntityRepository
 //    /**
 //     * @return ScheduleRental[] Returns an array of ScheduleRental objects
 //     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('s.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function findAllByOwner($user): array
+    {
+        return $this->createQueryBuilder('s')
+            ->join('s.animal', 'a')
+            ->Where('a.owner = :user')
+            ->setParameter('user', $user)
+            ->orderBy('s.startedAt', 'ASC')
+            ->setMaxResults(30)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function findAllByCustomer($user): array
+    {
+        return $this->createQueryBuilder('s')
+            ->join('s.animal', 'a')
+            ->Where('a.customer = :user')
+            ->setParameter('user', $user)
+            ->orderBy('s.startedAt', 'ASC')
+            ->setMaxResults(30)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 
 //    public function findOneBySomeField($value): ?ScheduleRental
 //    {

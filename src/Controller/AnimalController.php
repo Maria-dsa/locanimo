@@ -18,11 +18,14 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/animal')]
 class AnimalController extends AbstractController
 {
-    #[Route('/', name: 'app_animal_index', methods: ['GET'])]
-    public function index(AnimalRepository $animalRepository): Response
+    #[IsGranted('ROLE_USER')]
+    #[Route('/mine', name: 'app_animal_mine', methods: ['GET'])]
+    public function myAnimals(AnimalRepository $animalRepository): Response
     {
-        return $this->render('animal/index.html.twig', [
-            'animals' => $animalRepository->findAll(),
+        $user = $this->getUser();
+        $animals = $animalRepository->findAllByOwner($user);
+        return $this->render('animal/my_animals.html.twig', [
+            'animals' => $animals,
         ]);
     }
 
@@ -37,7 +40,6 @@ class AnimalController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $this->getUser();
             $animal->setOwner($user);
-            $availablity = new Availablity();
             $animalRepository->save($animal, true);
 
             return $this->redirectToRoute('app_animal_show', ['id' => $animal->getId()], Response::HTTP_SEE_OTHER);
@@ -59,6 +61,7 @@ class AnimalController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_USER')]
     #[Route('/{id}/edit', name: 'app_animal_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Animal $animal, AnimalRepository $animalRepository): Response
     {
@@ -77,6 +80,7 @@ class AnimalController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_USER')]
     #[Route('/{id}/add-availablities', name: 'app_animal_availablities_add', methods: ['GET', 'POST'])]
     public function addAvailablities(
         Request $request,
@@ -99,6 +103,7 @@ class AnimalController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_USER')]
     #[Route('/{id}/edit-availablities', name: 'app_animal_availablities_edit', methods: ['GET', 'POST'])]
     public function editAvailablities(
         Request $request,
@@ -120,8 +125,7 @@ class AnimalController extends AbstractController
         ]);
     }
 
-
-
+    #[IsGranted('ROLE_USER')]
     #[Route('/{id}', name: 'app_animal_delete', methods: ['POST'])]
     public function delete(Request $request, Animal $animal, AnimalRepository $animalRepository): Response
     {
