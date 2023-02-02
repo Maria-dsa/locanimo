@@ -4,8 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Animal;
 use App\Entity\Availablity;
-use App\Form\AnimalType;
+use App\Form\Animal\AnimalAvailablitiesType;
+use App\Form\Animal\AnimalType;
+use App\Form\AvailablityType;
 use App\Repository\AnimalRepository;
+use App\Repository\AvailablityRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,6 +37,7 @@ class AnimalController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $this->getUser();
             $animal->setOwner($user);
+            $availablity = new Availablity();
             $animalRepository->save($animal, true);
 
             return $this->redirectToRoute('app_animal_show', ['id' => $animal->getId()], Response::HTTP_SEE_OTHER);
@@ -70,6 +74,51 @@ class AnimalController extends AbstractController
             'form' => $form,
         ]);
     }
+
+    #[Route('/{id}/add-availablities', name: 'app_animal_availablities_add', methods: ['GET', 'POST'])]
+    public function addAvailablities(
+        Request $request,
+        Animal $animal,
+        AnimalRepository $animalRepository,
+        AvailablityRepository $availablityRepository
+    ): Response {
+        $availablity = new Availablity();
+        $availablity->setAnimal($animal);
+        $form = $this->createForm(AvailablityType::class, $availablity);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $availablityRepository ->save($availablity, true);
+            return $this->redirectToRoute('app_animal_show', ['id' => $animal->getId()], Response::HTTP_SEE_OTHER );
+        }
+        return $this->renderForm('availablity/new.html.twig', [
+            'form' => $form,
+            'animal' => $animal
+        ]);
+    }
+
+    #[Route('/{id}/edit-availablities', name: 'app_animal_availablities_edit', methods: ['GET', 'POST'])]
+    public function editAvailablities(
+        Request $request,
+        Animal $animal,
+        AnimalRepository $animalRepository
+    ): Response {
+        $form = $this->createForm(AnimalAvailablitiesType::class, $animal);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $animalRepository ->save($animal, true);
+
+            return $this->redirectToRoute('app_animal_show', ['id' => $animal->getId()], Response::HTTP_SEE_OTHER );
+        }
+        return $this->renderForm('animal/edit-availablities.html.twig', [
+            'form' => $form,
+            'animal' => $animal
+        ]);
+    }
+
+
 
     #[Route('/{id}', name: 'app_animal_delete', methods: ['POST'])]
     public function delete(Request $request, Animal $animal, AnimalRepository $animalRepository): Response

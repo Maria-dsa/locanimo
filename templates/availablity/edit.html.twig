@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Availablity{% endblock %}
+
+{% block body %}
+    <h1>Edit Availablity</h1>
+
+    {{ include('availablity/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_availablity_index') }}">back to list</a>
+
+    {{ include('availablity/_delete_form.html.twig') }}
+{% endblock %}
