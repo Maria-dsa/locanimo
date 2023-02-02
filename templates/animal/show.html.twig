@@ -3,36 +3,54 @@
 {% block title %}Animal{% endblock %}
 
 {% block body %}
-    <h1>Animal</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ animal.id }}</td>
-            </tr>
-            <tr>
-                <th>Breed</th>
-                <td>{{ animal.breed }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ animal.name }}</td>
-            </tr>
-            <tr>
-                <th>Age</th>
-                <td>{{ animal.age }}</td>
-            </tr>
-            <tr>
-                <th>Picture</th>
-                <td>{{ animal.picture }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ animal.description }}</td>
-            </tr>
-        </tbody>
-    </table>
+<div class="container-fluid flex col">
+    <h1 class="text-center text-white bg-secondary rounded-5 col-lg-6">{{ animal.name }}</h1>
+    <div class ="row">
+        <div class="animal col-lg-7 ms-lg-5">
+            <div class="row bg-secondary border-dark me-lg-4">
+                <div class="row">
+                    <div class="col">
+                        <img src="" alt="{{ animal.name }}">
+                    </div>
+                    <div class="col">
+                        <ul>
+                            <li>{{ animal.age }}</li>
+                            <li>{{ animal.breed }}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class=" row bg-light">
+                {{ animal.description }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="card h-100 bg-light col-lg-6 pt-2">
+                    <div class="card-header bg-primary text-white border-dark ">
+                        <h5 class="card-title">{{ animal.owner.firstName }} {{ animal.owner.lastName }}</h5>
+                    </div>
+                    <div class="card-body bg-transparent text-primary">
+                        {{ animal.owner.address }} - {{ animal.owner.zipCode }} {{ animal.owner.city }}
+                    </div>
+                    <div class="card-footer bg-transparent border-dark">
+                        {{ animal.owner.phoneNumber }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="availablity col-lg-4 bg-secondary text-white rounded-4 shadow pt-2 ">
+            <h3><i class="bi bi-calendar2-week-fill text-white me-2"></i> Disponibilités</h3>
+            <ul class="list-group pt-3">
+                {% for availablity in availablities %}
+                <li class="list-group-item bg-white"> <i class="bi bi-calendar2-week-fill text-dark me-2"></i>Du {{ availablity.startedAt|date('d/m/Y') }} au {{ availablity.endedAt|date('d/m/Y') }}
+                    - <i class="bi bi-calendar2-week-fill text-dark me-2"></i> Tarif/jour : {{ availablity.dailyPrice }} €</li>
+            {% endfor %}
+            </ul>
+
+        </div>
+    </div>
+</div>
+
 
     <a href="{{ path('app_animal_index') }}">back to list</a>
 
