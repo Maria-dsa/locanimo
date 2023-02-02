@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ScheduleRental index{% endblock %}
+
+{% block body %}
+    <h1>ScheduleRental index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>StartedAt</th>
+                <th>EndedAt</th>
+                <th>BillAmount</th>
+                <th>Status</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for schedule_rental in schedule_rentals %}
+            <tr>
+                <td>{{ schedule_rental.id }}</td>
+                <td>{{ schedule_rental.startedAt ? schedule_rental.startedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ schedule_rental.endedAt ? schedule_rental.endedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ schedule_rental.billAmount }}</td>
+                <td>{{ schedule_rental.status }}</td>
+                <td>
+                    <a href="{{ path('app_schedule_rental_show', {'id': schedule_rental.id}) }}">show</a>
+                    <a href="{{ path('app_schedule_rental_edit', {'id': schedule_rental.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}
