@@ -2,13 +2,12 @@
 
 namespace App\Controller;
 
-use App\Entity\Animal;
 use App\Entity\ScheduleRental;
-use App\Form\ScheduleRentalType;
+use App\Form\ScheduleRental\RentalValidationType;
+use App\Form\ScheduleRental\ScheduleRentalType;
 use App\Repository\AnimalRepository;
 use App\Repository\AvailablityRepository;
 use App\Repository\ScheduleRentalRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -78,7 +77,28 @@ class ScheduleRentalController extends AbstractController
             'schedule_rental' => $scheduleRental,
         ]);
     }
+//uniquement pour le owner
+    #[Route('/validation/{id}', name: 'app_schedule_rental_show', methods: ['GET', 'POST'])]
+    public function validation(
+        ScheduleRental $scheduleRental,
+        Request $request,
+        ScheduleRentalRepository $scheduleRentalRepository
+    ): Response {
+        $form = $this->createForm(RentalValidationType::class, $scheduleRental);
+        $form->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            $scheduleRentalRepository->save($scheduleRental, true);
+
+            //modifier le redirect
+            return $this->redirectToRoute('app_schedule_rental_index', [], Response::HTTP_SEE_OTHER);
+        }
+        return $this->render('schedule_rental/validation_show.html.twig', [
+            'schedule_rental' => $scheduleRental,
+            'form' => $form,
+        ]);
+    }
+//uniquement pour le customer
     #[Route('/{id}/edit', name: 'app_schedule_rental_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, ScheduleRental $scheduleRental, ScheduleRentalRepository $scheduleRentalRepository): Response
     {

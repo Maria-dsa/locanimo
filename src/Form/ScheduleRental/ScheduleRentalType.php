@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\ScheduleRental;
 
 use App\Entity\ScheduleRental;
 use Symfony\Component\Form\AbstractType;
