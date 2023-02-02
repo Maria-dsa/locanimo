@@ -39,6 +39,15 @@ class AvailablityRepository extends ServiceEntityRepository
         }
     }
 
+    public function findAllByDate(): array
+    {
+       return $this->createQueryBuilder('a')
+           ->orderBy('a.startedAt', 'ASC')
+           ->getQuery()
+           ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Availablity[] Returns an array of Availablity objects
 //     */

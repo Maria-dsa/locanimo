@@ -50,10 +50,12 @@ class AnimalController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_animal_show', methods: ['GET'])]
-    public function show(Animal $animal): Response
+    public function show(Animal $animal, AvailablityRepository $availablityRepository): Response
     {
+        $availablities = $availablityRepository->findAllByDate();
         return $this->render('animal/show.html.twig', [
             'animal' => $animal,
+            'availablities' => $availablities
         ]);
     }
 
