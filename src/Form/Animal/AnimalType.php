@@ -6,6 +6,7 @@ use App\Entity\Animal;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class AnimalType extends AbstractType
 {
@@ -15,7 +16,9 @@ class AnimalType extends AbstractType
             ->add('name')
             ->add('breed')
             ->add('age')
-            ->add('picture')
+            ->add('posterFile', VichFileType::class, [
+                'required'      => false,
+            ])
             ->add('description') //CKEDITOR
             ->add('species', null, [
                 'choice_label' => 'name',

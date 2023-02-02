@@ -2,13 +2,18 @@
 
 namespace App\Entity;
 
+use DateTimeInterface;
+use DateTime;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use App\Repository\AnimalRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
-use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AnimalRepository::class)]
+#[Vich\Uploadable]
 class Animal
 {
     #[ORM\Id]
@@ -25,8 +30,14 @@ class Animal
     #[ORM\Column(nullable: true)]
     private ?int $age = null;
 
-    #[ORM\Column(length: 100, nullable: true)]
-    private ?string $picture = null;
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $poster = null;
+
+    #[Vich\UploadableField(mapping: 'poster_file', fileNameProperty: 'poster')]
+    private ?File $posterFile = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?DatetimeInterface $updatedAt = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
@@ -90,16 +101,40 @@ class Animal
         return $this;
     }
 
-    public function getPicture(): ?string
+    public function getPoster(): ?string
     {
-        return $this->picture;
+        return $this->poster;
     }
 
-    public function setPicture(?string $picture): self
+    public function setPoster(?string $poster): self
     {
-        $this->picture = $picture;
+        $this->poster = $poster;
 
         return $this;
+    }
+
+    public function getPosterFile(): ?File
+    {
+        return $this->posterFile;
+    }
+
+    public function setPosterFile(File $image = null): Animal
+    {
+        $this->posterFile = $image;
+        if ($image) {
+            $this->updatedAt = new DateTime('now');
+        }
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?DatetimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?DatetimeInterface $updatedAt): void
+    {
+        $this->updatedAt = $updatedAt;
     }
 
     public function getDescription(): ?string

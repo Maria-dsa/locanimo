@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-primary static-top mb-5 shadow-lg ">
     <div class="container">
-        <a class="navbar-brand" href="/">
-            <img src="{{ asset('build/images/logo-locanimo.png') }}" alt="Logo Locanimo" height="100">
+        <h1 class="navbar-brand" href="/">
+            <h1 class="text-white bg-secondary p-2 rounded-pill">Locanim<i class="bi bi-chat-heart-fill text-white"></i></h1>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -36,13 +36,13 @@
 
                 {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_login') }}">Se connecter</a>
+                        <a class="nav-link text-white" href="{{ path('app_login') }}">Se connecter</a>
                     </li>
                     <li class="nav-item">
-                        <p class="nav-link">|</p>
+                        <p class="nav-link text-white ">|</p>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="">S'inscrire</a>
+                    <li class="nav-item text-white">
+                        <a class="nav-link text-white" href="">S'inscrire</a>
                     </li>
                 {% endif %}
             </ul>
