@@ -27,7 +27,7 @@
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title text-primary">
-                                    <i class="bi bi-person me-2"></i></i>
+                                    <i class="bi bi-person me-2"></i></i>Client <br/>
                                     {{ scheduleRental.customer.firstName }} {{ scheduleRental.customer.lastName }} </h5>
                                 <ul class="list-unstyled">
                                     <li><i class="bi bi-postcard me-2"></i>{{ scheduleRental.customer.address}}</li>
@@ -38,8 +38,7 @@
                             </div>
                             <div class="card-footer bg-transparent border-dark">
                                 <h5 class="card-title text-primary">Statut :
-                                    {{ scheduleRental.status }} </h5>
-
+                                    <span class="bg-info text-white rounded-2 p-1">{{ scheduleRental.status }} </span></h5>
                                 <br><a href="{{ path('app_schedule_validation_show', {id: scheduleRental.id }) }}"
                                        class="stretched-link"></a>
                             </div>
