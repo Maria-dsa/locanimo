@@ -40,10 +40,6 @@ class AnimalController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $this->getUser();
             $animal->setOwner($user);
-//            $availablity = new Availablity();
-//            $availablity->setStartedAt(new \DateTime());
-//            $availablity->setStartedAt(new \DateTime());
-//            $animal->addAvailablity($availablity);
             $animalRepository->save($animal, true);
 
             return $this->redirectToRoute('app_animal_show', ['id' => $animal->getId()], Response::HTTP_SEE_OTHER);
@@ -75,7 +71,7 @@ class AnimalController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $animalRepository->save($animal, true);
 
-            return $this->redirectToRoute('app_animal_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_animal_mine', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('animal/edit.html.twig', [
@@ -137,6 +133,6 @@ class AnimalController extends AbstractController
             $animalRepository->remove($animal, true);
         }
 
-        return $this->redirectToRoute('app_animal_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_animal_mine', [], Response::HTTP_SEE_OTHER);
     }
 }

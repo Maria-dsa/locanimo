@@ -42,7 +42,7 @@ class AnimalFixtures extends Fixture implements DependentFixtureInterface
             'name' => 'Coco',
             'age' => '4',
             'picture' => '',
-            'description' => 'Lachez-moi dans votre jardin et je vous tond la pelouse parfaitement.',
+            'description' => 'Lachez-moi dans votre jardin et je vous tonds la pelouse parfaitement.',
             'reference' => 'species_2',
             'owner' => 'user_0',
         ],
