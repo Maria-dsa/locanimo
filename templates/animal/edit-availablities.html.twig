@@ -6,6 +6,10 @@
     <div class="container">
         <h1 class ="text-center"><i class="bi bi-gear me-2"></i>Editer les disponibilités</h1>
         <h4 class = "text-warning text-center"> Pensez à bien mettre à jour les disponibilités en fonctions des réservations effectuées.</h4>
+    <div class="m-2">
+        <a href="{{ path('app_animal_availablities_add', {'id':animal.id })}}" type="button" class="btn btn-outline-primary mx-5">
+                <i class="bi bi-plus-circle-fill mx-2"></i> Ajouter une disponibilité</a>
+    </div>
 
     {{ form_start(form) }}
     {% for availablity in form.availablities %}
@@ -33,15 +37,12 @@
       <div class="text-center">
         <button type="submit" class="btn btn-primary mt-3 col-3"><i class="bi bi-check-lg me-2"></i><span>envoyer</span></button>
     </div>
-
     {{ form_end(form) }}
 
-    <button><a href="{{ path('app_animal_availablities_add', {'id':animal.id })}}">Ajouter une disponibilité</a></button>
 
     <a href=" {{ path('app_animal_show', {id: animal.id }) }} ">
         <i class="bi bi-arrow-return-left me-2"></i><span>Retour à la fiche animal</span>
     </a>
     </div>
-
 
 {% endblock %}

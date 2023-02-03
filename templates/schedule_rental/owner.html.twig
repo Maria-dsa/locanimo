@@ -23,7 +23,9 @@
                             <div class="card-header bg-transparent border-dark text-secondary">
                                 <h4 class="card-title"><i class="bi bi-calendar2-week-fill text-secondary me-2"></i>
                                     Du {{ scheduleRental.startedAt|date('d/m/Y')}}
-                                    au {{ scheduleRental.endedAt|date('d/m/Y')}}</h4>
+                                    au {{ scheduleRental.endedAt|date('d/m/Y')}}
+                                    <div><i class="bi bi-tags text-secondary me-2"></i>{{  scheduleRental.billAmount}} €</div>
+                                </h4>
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title text-primary">
