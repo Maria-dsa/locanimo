@@ -3,9 +3,12 @@
 {% block title %}New Animal{% endblock %}
 
 {% block body %}
-    <h1>Create new Animal</h1>
+    <div class="container">
+        <h1 class ="text-center"><i class="bi bi-gear me-2"></i> Ajouter une nouvelle annonce</h1>
 
     {{ include('animal/_form.html.twig') }}
-
+        <div class ="text-center m-3">
     <a href="{{ path('app_animal_mine') }}">Retour à la liste de mes animaux</a>
+        </div>
+    </div>
 {% endblock %}

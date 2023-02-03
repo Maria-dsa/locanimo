@@ -1,11 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Availablity{% endblock %}
+{% block title %}Ajouter une disponibilité{% endblock %}
 
 {% block body %}
-    <h1>Create new Availablity</h1>
+    <div class = "container">
+        <h1 class ="text-center"><i class="bi bi-gear me-2"></i> Ajouter une disponibilité</h1>
 
     {{ include('availablity/_form.html.twig') }}
-
-    {#  <a href="{{ path('app_animal_availablities_edit', {id:animal.id}) }}">back to list</a>#}
+<div class ="text-center m-3">
+    <a href="{{ path('app_animal_availablities_edit', {id:animal.id}) }}">Retour à la liste des disponibilités</a>
+</div>
+    </div>
 {% endblock %}
