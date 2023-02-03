@@ -1,5 +1,5 @@
-<div class="container text-center col-lg-8 bg-secondary mt-2 rounded-4">
-    <form method="post" action="{{ path('app_availablity_delete', {'id': availablity.id}) }}" onsubmit="return confirm('Etes-vous sûr de vouloir supprimer cette annonce?');">
+<div class="container text-center col-lg-2 bg-warning text-white mt-2 rounded-4 mx-auto">
+    <form method="post" action="{{ path('app_availablity_delete', {'id': availablity.id}) }}" onsubmit="return confirm('Etes-vous sûr de vouloir supprimer cette disponibilité?');">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ availablity.id) }}">
     <button class="btn">Supprimer</button>
 </form>

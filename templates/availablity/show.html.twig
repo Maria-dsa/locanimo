@@ -1,33 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Availablity{% endblock %}
+{% block title %}Disponibilité{% endblock %}
 
 {% block body %}
-    <h1>Availablity</h1>
+    <div class="container flex mx-auto">
+        <div class="availablity col-lg-4 text-white rounded-4 flex mx-auto ">
+            <div class="bg-secondary shadow p-2 rounded-2">
+                <h3><i class="bi bi-calendar2-week-fill text-white me-2"></i> Disponibilité</h3>
+                <ul class="list-group pt-3">
+                    <li class="list-group-item bg-white"> <i class="bi bi-calendar2-week-fill text-dark me-2"></i>
+                        Du {{ availablity.startedAt ? availablity.startedAt|date('d/m/Y') : '' }}
+                        au {{ availablity.startedAt ? availablity.startedAt|date('d/m/Y') : '' }}
+                    </li>
+                    <li class="list-group-item bg-white"> <i class="bi bi-calendar2-week-fill text-dark me-2"></i>
+                        <i class="bi bi-tags text-primary"></i> {{ availablity.endedAt ? availablity.endedAt|date('d/m/Y') : '' }} €/j
+                    </li>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ availablity.id }}</td>
-            </tr>
-            <tr>
-                <th>StartedAt</th>
-                <td>{{ availablity.startedAt ? availablity.startedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>EndedAt</th>
-                <td>{{ availablity.endedAt ? availablity.endedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>DailyPrice</th>
-                <td>{{ availablity.dailyPrice }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_animal_availablities_edit', {id: availablity.animal.id}) }}">Retour aux disponibilités</a>
-
+                </ul>
+            </div>
+        </div>
 
     {{ include('availablity/_delete_form.html.twig') }}
+<div class=" text-center">
+    <a href="{{ path('app_animal_availablities_edit', {id: availablity.animal.id}) }}">Retour aux disponibilités</a>
+</div>
+    </div>
+
 {% endblock %}
