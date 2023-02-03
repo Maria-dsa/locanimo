@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-primary static-top mb-5 shadow-lg ">
     <div class="container">
         <a class="navbar-brand" href="/">
-            <h1 class="text-white bg-secondary p-2 rounded-pill">Locanim<i class="bi bi-chat-heart-fill text-white"></i></h1>
+            <h1 class="text-white bg-secondary p-2 rounded-pill shadow-lg">Locanim<i class="bi bi-chat-heart-fill text-white"></i></h1>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -11,19 +11,17 @@
             <ul class="navbar-nav ms-auto ">
                 {% if app.user %}
                     <li class="nav-item ">
-                        <a class="nav-link text-white" href="{{ path('app_animal_mine') }}"><i class="bi bi-card-checklist"></i>Mes animaux</a>
+                        <a class="nav-link text-white" href="{{ path('app_animal_mine') }}"><i class="bi bi-star-fill"></i>Mes animaux</a>
                     </li>
 
                     <li class="nav-item ">
-                        <a class="nav-link text-white" href="{{ path('app_schedule_rental_owner') }}"><i class="bi bi-calendar3"></i> Mon carnet de réservation</a>
+                        <a class="nav-link text-white" href="{{ path('app_schedule_rental_owner') }}"><i class="bi bi-people"></i> Mon carnet de réservation</a>
                     </li>
 
-                    <li class="nav-item">
-                        <p class ="text-white">|||||||||||||||||</p>
-                    </li>
+
 
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{{ path('app_schedule_rental_customer') }}#"><i class="bi bi-people"></i> Mes demandes de réservation</a>
+                        <a class="nav-link text-white " href="{{ path('app_schedule_rental_customer') }}#"> <i class="bi bi-calendar3 text-white bg-primary"></i><pan class="bg-secondary mx-2 px-1 rounded-2">Mes demandes de réservation</pan></a>
                     </li>
 
                     <div class="btn-group">

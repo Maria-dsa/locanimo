@@ -48,7 +48,7 @@ class Animal
     #[ORM\ManyToOne(inversedBy: 'animals')]
     private ?User $owner = null;
 
-    #[ORM\OneToMany(mappedBy: 'animal', targetEntity: Availablity::class)]
+    #[ORM\OneToMany(mappedBy: 'animal', targetEntity: Availablity::class, cascade:['persist'])]
     private Collection $availablities;
 
     #[ORM\OneToMany(mappedBy: 'animal', targetEntity: ScheduleRental::class)]

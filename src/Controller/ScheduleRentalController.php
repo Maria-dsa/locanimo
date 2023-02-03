@@ -60,20 +60,36 @@ class ScheduleRentalController extends AbstractController
             $nbDays = ($end_timestamp - $start_timestamp) / 86400;
 
             $availablities = $availablityRepository ->findAll();
+            $yetScheduledRentals = $scheduleRentalRepository->findAll();
             foreach ($availablities as $availablity) {
-               if($startRent >= $availablity->getStartedAt() && $endRent <= $availablity->getEndedAt()) {
-                   $billAmount = $nbDays * $availablity->getDailyPrice() ;
-                   $scheduleRental->setBillAmount($billAmount);
-                   $scheduleRental->setAnimal($animal);
-                   $scheduleRental->setCustomer($user);
-                   $scheduleRental->setStatus('pending');
-                   $scheduleRentalRepository->save($scheduleRental, true);
-                   $this->addFlash('success', "Votre réservation a bien été prise en compte. 
-                   La montant prévu est de " . $billAmount . " €. Merci !");
+                foreach ($yetScheduledRentals as $yetScheduledRental) {
+                    if(
+                        $startRent >= $availablity->getStartedAt()
+                        && $endRent <= $availablity->getEndedAt()
+                        && (
+                            ($startRent < $yetScheduledRental->getStartedAt()
+                                && $endRent < $yetScheduledRental->getEndedAt())
+                            ||
+                            ($startRent > $yetScheduledRental->getStartedAt()
+                                && $endRent > $yetScheduledRental->getEndedAt())
+                            || ($yetScheduledRental->getStatus() != "pending"
+                                || $yetScheduledRental->getStatus() != "accepted")
+                        )
+                    ) {
+                        $billAmount = $nbDays * $availablity->getDailyPrice() ;
+                        $scheduleRental->setBillAmount($billAmount);
+                        $scheduleRental->setAnimal($animal);
+                        $scheduleRental->setCustomer($user);
+                        $scheduleRental->setStatus('pending');
+                        $scheduleRentalRepository->save($scheduleRental, true);
+                    }
                 }
             }
             if($scheduleRental->getId()===null) {
                 $this->addFlash('danger', "Période non disponible, veuillez consulter les disponibilités !");
+            } else {
+                $this->addFlash('success', "Votre réservation a bien été prise en compte. 
+                        La montant prévu est de " . $billAmount . " €. Merci !");
             }
             return $this->redirectToRoute('app_schedule_rental_customer', [],Response::HTTP_SEE_OTHER);
         }

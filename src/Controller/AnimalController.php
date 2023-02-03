@@ -40,8 +40,10 @@ class AnimalController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $this->getUser();
             $animal->setOwner($user);
-            $availablity = new Availablity();
-            $animal->addAvailablity($availablity);
+//            $availablity = new Availablity();
+//            $availablity->setStartedAt(new \DateTime());
+//            $availablity->setStartedAt(new \DateTime());
+//            $animal->addAvailablity($availablity);
             $animalRepository->save($animal, true);
 
             return $this->redirectToRoute('app_animal_show', ['id' => $animal->getId()], Response::HTTP_SEE_OTHER);

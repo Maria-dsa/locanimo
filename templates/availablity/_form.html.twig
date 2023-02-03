@@ -1,17 +1,9 @@
-<div class="container text-center col-lg-8 bg-secondary mt-2 rounded-4">
+<div class="container text-center col-lg-6 bg-secondary mt-2 rounded-4">
 {{ form_start(form) }}
-    <div class="d-flex justify-content-center p-3">
-        <div class="col-3 me-3 text-dark p-2 text-white fw-bold">
         Du {{ form_widget(form.startedAt) }}
-        </div>
-        <div class="col-3 me-3 text-dark p-2 text-white fw-bold">
-            AU {{ form_widget(form.endedAt) }}
-        </div>
-        <div class="col-3 me-3 text-dark p-2 text-white fw-bold">
-            Tarif/jour (€) {{ form_widget(form.dailyPrice) }}
-        </div>
-    </div>
-    <div class="text-center pb-2">
+        Au {{ form_widget(form.endedAt) }}
+        Tarif/jour (€) {{ form_widget(form.dailyPrice) }}
+<div class="text-center pb-2">
         <button type="submit" class="btn btn-primary mt-3 col-3"><i class="bi bi-check-lg me-2"></i><span>envoyer</span></button>
     </div>
 {{ form_end(form) }}
