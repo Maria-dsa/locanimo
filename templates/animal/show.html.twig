@@ -49,7 +49,7 @@
                         or availablity.endedAt|date('Y-m-d') > "now"|date('Y-m-d') %}
                     <li class="list-group-item bg-white"> <i class="bi bi-calendar2-week-fill text-dark me-2"></i>
                     Du {{ availablity.startedAt|date('d/m/Y') }} au {{ availablity.endedAt|date('d/m/Y') }}
-                    - <span class="bg-dark text-white p-1 rounded-2"><i class="bi bi-tags text-white"></i> {{ availablity.dailyPrice }} €/j</span></li>
+                    - <i class="bi bi-tags text-dark me-2"></i><span class="bg-success text-white p-1 rounded-2"> {{ availablity.dailyPrice }} €/Jour</span></li>
                     {% endif %}
                     {% else %}
                    <li class="list-group-item bg-white">pas encore de disponibilités</li>
@@ -67,8 +67,8 @@
                         {% endif %}
                         {% else %}
                     <div class="m-3">
-                        <a href="{{ path('app_login') }}" type="button" class="btn bg-warning text-white mx-auto">
-                            <span>Pour faire une réservation, connectez-vous</span></a>
+                        <a href="{{ path('app_login') }}" type="button" class="btn bg-info text-white mx-auto">
+                            <i class="bi bi-box-arrow-in-right me-2"></i><span>Faire une réservation ? Connectez-vous </span></a>
                     </div>
                 {% endif %}
             </div>
@@ -96,7 +96,7 @@
 
         <a class=" btn btn-outline-primary m-1" href="{{ path('app_animal_edit', {'id': animal.id}) }}"role="button">
             <i class="bi bi-pencil-square me-2"></i>Modifier la fiche</a>
-    {{ include('animal/_delete_form.html.twig') }}
+    <div class="mb-4">{{ include('animal/_delete_form.html.twig') }}</div>
     {% endif %}
     {% else %}
         <a href="{{ path('app_home') }}"><i class="bi bi-backspace-reverse me-2"></i>Retour à la liste</a>
