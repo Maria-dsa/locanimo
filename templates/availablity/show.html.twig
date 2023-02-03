@@ -26,9 +26,8 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_availablity_index') }}">back to list</a>
+    <a href="{{ path('app_animal_availablities_edit', {id: availablity.animal.id}) }}">Retour aux disponibilités</a>
 
-    <a href="{{ path('app_availablity_edit', {'id': availablity.id}) }}">edit</a>
 
     {{ include('availablity/_delete_form.html.twig') }}
 {% endblock %}

@@ -58,8 +58,7 @@ class ScheduleRentalRepository extends ServiceEntityRepository
     public function findAllByCustomer($user): array
     {
         return $this->createQueryBuilder('s')
-            ->join('s.animal', 'a')
-            ->Where('a.customer = :user')
+            ->Where('s.customer = :user')
             ->setParameter('user', $user)
             ->orderBy('s.startedAt', 'ASC')
             ->setMaxResults(30)

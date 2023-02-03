@@ -32,7 +32,7 @@
                             <img src ="https://picsum.photos/id/236/30/30" class="rounded-circle"/>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li class="dropdown-item fst-italic text-uppercase">xxx</li>
+                            <li class="dropdown-item fst-italic text-uppercase">{{ app.user.firstName }} {{ app.user.lastName }}</li>
                             <li><a class="dropdown-item" href="">Mon compte</a></li>
                             <li><a class="dropdown-item" href="{{ path('app_logout') }}">Se déconnecter</a></li>
                         </ul>

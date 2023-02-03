@@ -73,6 +73,6 @@ class AvailablityController extends AbstractController
             $availablityRepository->remove($availablity, true);
         }
 
-        return $this->redirectToRoute('app_availablity_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_animal_availablities_edit', ['id' => $availablity->getAnimal()->getId()], Response::HTTP_SEE_OTHER);
     }
 }

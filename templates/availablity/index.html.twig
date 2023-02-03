@@ -3,37 +3,5 @@
 {% block title %}Availablity index{% endblock %}
 
 {% block body %}
-    <h1>Availablity index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>StartedAt</th>
-                <th>EndedAt</th>
-                <th>DailyPrice</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for availablity in availablities %}
-            <tr>
-                <td>{{ availablity.id }}</td>
-                <td>{{ availablity.startedAt ? availablity.startedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ availablity.endedAt ? availablity.endedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ availablity.dailyPrice }}</td>
-                <td>
-                    <a href="{{ path('app_availablity_show', {'id': availablity.id}) }}">show</a>
-                    <a href="{{ path('app_availablity_edit', {'id': availablity.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_availablity_new') }}">Create new</a>
 {% endblock %}
