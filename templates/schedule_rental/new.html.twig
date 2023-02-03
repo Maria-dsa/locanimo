@@ -1,11 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New ScheduleRental{% endblock %}
+{% block title %}Nouvelle réservation{% endblock %}
 
 {% block body %}
-    <h1>Create new ScheduleRental</h1>
+    <div class ="container">
+        <h1 class ="text-center"><i class="bi bi-gear me-2"></i> Faire une réservation</h1>
 
     {{ include('schedule_rental/_form.html.twig') }}
-
-    <a href="{{ path('app_schedule_rental_index') }}">back to list</a>
+        <div class ="text-center m-3">
+    <a href="{{ path('app_schedule_rental_customer') }}">retour à la liste des réservations</a>
+        </div>
+    </div>
 {% endblock %}

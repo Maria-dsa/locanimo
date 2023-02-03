@@ -75,7 +75,7 @@ class ScheduleRentalController extends AbstractController
             if($scheduleRental->getId()===null) {
                 $this->addFlash('danger', "Période non disponible, veuillez consulter les disponibilités !");
             }
-            return $this->redirectToRoute('app_animal_show', ['id' => $animal->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_schedule_rental_customer', [],Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('schedule_rental/new.html.twig', [
